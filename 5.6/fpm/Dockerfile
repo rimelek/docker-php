@@ -17,9 +17,11 @@ RUN apt-get update && apt-get install -y \
         libxslt-dev \
         libkrb5-dev \
         libtidy-dev \
+        libsnmp-dev \
+        snmp \
     && docker-php-ext-install -j$(nproc) bcmath bz2 calendar ctype curl fileinfo dom exif ftp gettext \
                                          hash iconv intl json mbstring mcrypt mysqli opcache \
-                                         pdo pdo_mysql phar posix recode session simplexml \
+                                         pdo pdo_mysql phar posix recode session simplexml snmp \
                                          sockets tidy tokenizer xml xmlrpc xmlwriter xsl zip \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
                                    --with-png-dir=/usr/include/ --enable-gd-native-ttf \
