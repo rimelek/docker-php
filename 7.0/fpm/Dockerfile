@@ -55,5 +55,6 @@ RUN apt-get update && apt-get install -y \
             && cd lib/oracle/$ICVERSION/client \
             && ln -s ../../../../ lib \
             && cd - \
-            && ORACLE_HOME=/opt/oracle/instantclient/lib/oracle/$ICVERSION/client/ docker-php-ext-configure pdo_oci; \
+            && ORACLE_HOME=/opt/oracle/instantclient/lib/oracle/$ICVERSION/client/ docker-php-ext-configure pdo_oci  \
+            && docker-php-ext-install pdo_oci
        fi;
