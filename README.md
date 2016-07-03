@@ -1,20 +1,38 @@
 # README
 
-## ORACLE támogatás
+## ORACLE support
 
-Le kell tölteni az Oracle honlapjáról az Instant Client-ből a Basic csomagot és az SDK-t.
-
+* Download the Basic and SDK package of Oracle Instant Client from the official source (you need to accept a license): 
 [http://www.oracle.com/technetwork/database/features/instant-client/index.html](http://www.oracle.com/technetwork/database/features/instant-client/index.html)
+* Copy the contents of instantclient_xx.x folder from each package into  5.6/fpm/opt or 7.0/fpm/opt
+* You can build the image now using build.sh. See in the next chapter.
 
-**Basic telepítése**
+## Build an image
 
-A ZIP formátumú csomagokat kell letölteni és Basic-ből az "instantclient_xx.x" almappa tartalmát bemásolni a
-Dockerfile melletti opt/oracle/instantclient mappába.
+Make sure the root folder is writable!
 
-**SDK telepítése**
+**PHP 7.0-fpm**:
 
-A ZIP fomrátumú csomagot kell szintén letölteni és az "instantclient_xx.x" almappa tartalmát bemásolni a
-Dockerfile melletti opt/oracle/instantclient mappába. Ez egy "sdk" almappát fog jelenteni az
-"opt/oracle/instantclient" alatt
+Install all supported extensions:
+
+    chmod +x ./build.sh
+    ./build.sh 7.0/fpm -t myphpimage
+    
+or install only some specified additional extensions:
+
+    chmod +x ./build.sh
+    ./build.sh 7.0/fpm --build-arg PHP_EXT_GROUP=none PHP_EXT="gd bz2" --build-arg PECL_EXT_GROUP=none -t myphpimage
+
+**PHP 5.6-fpm**:
+
+Install all supported extensions:
+
+    chmod +x ./build.sh
+    ./build.sh 5.6/fpm -t myphpimage
+    
+or install only some specified additional extensions:
+
+    chmod +x ./build.sh
+    ./build.sh 5.6/fpm --build-arg PHP_EXT_GROUP=none PHP_EXT="gd bz2" --build-arg PECL_EXT_GROUP=none -t myphpimage
 
 
