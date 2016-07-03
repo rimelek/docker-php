@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends \
+        libedit-dev \
+        libreadline-dev \
+    && docker-php-ext-install -j$(nproc) readline
