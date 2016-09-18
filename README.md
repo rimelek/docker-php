@@ -5,7 +5,7 @@
 This repository contains the source to build multiple PHP versions based on the [official Docker images of PHP](https://hub.docker.com/_/php/).
 For now, only PHP 5.6 FPM and PHP 7.0 FPM are supported. 
 
-I makes easier to install an extension without knowing which dependencies you need to install or how you have to configure
+It makes easier to install an extension without knowing which dependencies you need to install or how you have to configure
 the dependencies before running the official docker-php-ext-install.
 
 Only thing you need to do is specifying which extensions you want to be installed. You can also install every supported
