@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+DIR=`dirname "$0"`
+EXT=$1
+INSTALL_SCRIPT="${DIR}/re-pecl-ext-${EXT}"
+if [ -x ${INSTALL_SCRIPT} ]; then
+    exec "${INSTALL_SCRIPT}"
+else
+    pecl install ${EXT}
+fi;
