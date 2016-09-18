@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+cd /opt/oracle/instantclient \
+    && ICVERSION=$(ls | (grep -o '[0-9]\{2\}\.[0-9]\+' | head -n 1 || true)) \
+    && if [ "$ICVERSION" != "" ]; then \
+            apt-get install -y --no-install-recommends libaio-dev \
+            && ln -s libclntsh.so.* libclntsh.so \
+            && ln -s libocci.so.* libocci.so \
+            && echo /opt/oracle/instantclient >> /etc/ld.so.conf \
+            && ldconfig \
+            && docker-php-ext-configure oci8 --with-oci8=instantclient,/opt/oracle/instantclient \
+            && docker-php-ext-install oci8; \
+       fi;

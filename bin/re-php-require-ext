@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+DIR=`dirname "$0"`
+EXT=$1
+INSTALL_SCRIPT="${DIR}/re-php-install-ext"
+
+ISINSTALLED=$(php -r "echo extension_loaded('${EXT}');")
+
+if [ "${ISINSTALLED}" != "1" ]; then
+    exec ${INSTALL_SCRIPT};
+fi;
