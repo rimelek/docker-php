@@ -9,7 +9,7 @@ for ARG in "$@"; do
     ARGS="${ARGS} \"${ARG//\"/\\\"}\""
 done;
 
-VERSIONS="5.6/fpm 7.0/fpm"
+VERSIONS="5.6/fpm 7.0/fpm 7.1/fpm"
 
 if [ -d build ]; then 
     rm -R build
