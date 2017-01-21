@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends \
+        libxml2-dev \
+  && docker-php-ext-install xmlrpc

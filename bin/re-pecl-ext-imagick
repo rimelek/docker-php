@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends imagemagick libmagickwand-dev \
+    && echo "autodetect" | pecl install imagick \
+    && apt-get purge -y libmagickwand-dev \
+    && apt-get autoremove -y \
+    && docker-php-ext-enable imagick
