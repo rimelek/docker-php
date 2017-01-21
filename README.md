@@ -1,5 +1,6 @@
 # Supported tags
 
+- 7.1-fpm ([7.1/fpm/Dockerfile](https://github.com/rimelek/docker-php/blob/build/7.1/fpm/Dockerfile))
 - 7.0-fpm ([7.0/fpm/Dockerfile](https://github.com/rimelek/docker-php/blob/build/7.0/fpm/Dockerfile))
 - 5.6-fpm ([5.6/fpm/Dockerfile](https://github.com/rimelek/docker-php/blob/build/5.6/fpm/Dockerfile))
 
