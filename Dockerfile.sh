@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-NO_HOST=$(NO_HOST=$(ping -c 1 rimelek.php.apt-cacher-ng 2>/dev/null | tail -n1 | wc -l)) \
+NO_HOST=$(NO_HOST=$(ping -c 1 itsziget.php.apt-cacher-ng 2>/dev/null | tail -n1 | wc -l)) \
  && if [ "${NO_HOST}" == "0" ]; then \
-        echo 'Acquire::HTTP::Proxy "http://rimelek.php.apt-cacher-ng:3142";' >> /etc/apt/apt.conf.d/01rimelek.php.apt-cacher-ng \
-            && echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01rimelek.php.apt-cacher-ng; \
+        echo 'Acquire::HTTP::Proxy "http://itsziget.php.apt-cacher-ng:3142";' >> /etc/apt/apt.conf.d/01itsziget.php.apt-cacher-ng \
+            && echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01itsziget.php.apt-cacher-ng; \
     fi \
  && PHP_EXT_GROUP_NONE="" \
  && PHP_EXT_GROUP_ALL="" \
@@ -48,6 +48,6 @@ NO_HOST=$(NO_HOST=$(ping -c 1 rimelek.php.apt-cacher-ng 2>/dev/null | tail -n1 |
             exit ${EXCODE}; \
         fi; \
     done \
- && if [ -f /etc/apt/apt.conf.d/01rimelek.php.apt-cacher-ng ]; then \
-        unlink /etc/apt/apt.conf.d/01rimelek.php.apt-cacher-ng; \
+ && if [ -f /etc/apt/apt.conf.d/01itszget.php.apt-cacher-ng ]; then \
+        unlink /etc/apt/apt.conf.d/01itsziget.php.apt-cacher-ng; \
     fi

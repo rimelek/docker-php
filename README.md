@@ -1,8 +1,8 @@
 # Supported tags
 
-- 7.1-fpm ([7.1/fpm/Dockerfile](https://github.com/rimelek/docker-php/blob/build/7.1/fpm/Dockerfile))
-- 7.0-fpm ([7.0/fpm/Dockerfile](https://github.com/rimelek/docker-php/blob/build/7.0/fpm/Dockerfile))
-- 5.6-fpm ([5.6/fpm/Dockerfile](https://github.com/rimelek/docker-php/blob/build/5.6/fpm/Dockerfile))
+- 7.1-fpm ([7.1/fpm/Dockerfile](https://github.com/itsziget/docker-php/blob/build/7.1/fpm/Dockerfile))
+- 7.0-fpm ([7.0/fpm/Dockerfile](https://github.com/itsziget/docker-php/blob/build/7.0/fpm/Dockerfile))
+- 5.6-fpm ([5.6/fpm/Dockerfile](https://github.com/itsziget/docker-php/blob/build/5.6/fpm/Dockerfile))
 
 # Introduction
 
@@ -12,7 +12,7 @@ extensions. You can even install oci8 and pdo_oci.
 
 All images in this repository based on the official Docker images but gives you more extensions.
 If you want to install less extensions but more than provided by the official version, you can use the source [from
-github](https://github.com/rimelek/docker-php/tree/master) and install only some of the supported extensions.
+github](https://github.com/itsziget/docker-php/tree/master) and install only some of the supported extensions.
 
 For more information about how PHP images works or using smaller official images based on alpine linux for example, 
 please, visit the [official repository of PHP](https://hub.docker.com/_/php/).
