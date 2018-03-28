@@ -1,2 +1,5 @@
 /.idea
 /build
+/published
+/common/opt/oracle/instantclient/*
+!/common/opt/oracle/instantclient/.gitkeep

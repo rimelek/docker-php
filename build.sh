@@ -11,14 +11,15 @@ done;
 
 VERSIONS="5.6/fpm 7.0/fpm 7.1/fpm 7.2/fpm"
 
-if [ -d build ]; then 
-    rm -R build
-fi;
-
-mkdir build
+mkdir -p build/${VERSION}
 
 for V in ${VERSIONS}; do
-    mkdir -p build/${V};
+    if [ "${V}" == "${VERSION}" ]; then
+        if [ -d "build/${V}" ]; then
+            rm -rf "build/${V}"
+        fi;
+        mkdir -p "build/${V}"
+    fi;
 done;
 
 if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
