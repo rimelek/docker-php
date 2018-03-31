@@ -13,5 +13,6 @@ ARG PECL_EXT=""
 
 RUN chmod +x /usr/local/bin/re-php-* \
  && chmod +x /usr/local/bin/re-pecl-* \
+ && sync \
  && /usr/local/bin/re-php-Dockerfile.sh \
  && unlink /usr/local/bin/re-php-Dockerfile.sh
