@@ -57,6 +57,7 @@ mkdir -p "${TARGET_VERSION_PATH}"
 cp -R "${GIT_DIR}" "${TARGET_VERSION_PATH}"
 cd "${TARGET_VERSION_PATH}"
 
+git fetch "${REMOTE_NAME}"
 if [ `git branch --list --remote "${REMOTE_NAME}/${BRANCH_NAME}"` ]; then
     git checkout "${REMOTE_NAME}/${BRANCH_NAME}" -b "${BRANCH_NAME}"
     git rm -rf .
