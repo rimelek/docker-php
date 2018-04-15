@@ -32,8 +32,8 @@ for V in ${VERSIONS}; do
 done;
 
 if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
-    cp -R common/* build/${VERSION}/
-    cp -R ${VERSION}/* build/${VERSION}/
+    cp -R common/. build/${VERSION}/.
+    cp -R ${VERSION}/. build/${VERSION}/.
     cd build/${VERSION}/
 
     cp "Dockerfile.tpl" "Dockerfile"
