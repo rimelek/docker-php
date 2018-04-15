@@ -1,75 +1,54 @@
 #!/usr/bin/env bash
 
-VERSION=$1
+BUILD_SOURCE=""
+BUILD_SOURCE_REMOTE=""
+BUILD_SOURCE_REMOTE_BRANCH=""
 
-shift 
+while getopts ":s:rb:" opt ; do
+    case ${opt} in
+        s)
+            BUILD_SOURCE="${OPTARG}";
+            ;;
+        r)
+            BUILD_SOURCE_REMOTE="y";
+            ;;
+        b)
+            BUILD_SOURCE_REMOTE_BRANCH="${OPTARG}"
+            ;;
+        \?)
+            >&2 echo "Invalid option: -${OPTARG}"
+            exit 1;
+            ;;
+    esac;
+done;
+
+shift $((OPTIND-1))
 
 ARGS=""
 for ARG in "$@"; do
     ARGS="${ARGS} \"${ARG//\"/\\\"}\""
 done;
 
-VERSIONS="5.6/fpm 7.0/fpm 7.1/fpm 7.2/fpm"
+if [ -n "${BUILD_SOURCE_REMOTE}" ] && [ -z "${BUILD_SOURCE_REMOTE_BRANCH}" ]; then
+    >&2 echo "-b is required when -r is given";
+    exit 1
+fi;
 
-mkdir -p build/${VERSION}
+if [ -z "${BUILD_SOURCE}" ]; then
+    >&2 echo "-s is required";
+    exit 1
+fi;
 
-for V in ${VERSIONS}; do
-    if [ "${V}" == "${VERSION}" ]; then
-        if [ -d "build/${V}" ]; then
-            rm -rf "build/${V}"
-        fi;
-        mkdir -p "build/${V}"
-    fi;
-done;
-
-if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
-    cp -R common/* build/${VERSION}/
-    cp -R ${VERSION}/* build/${VERSION}/
-    cd build/${VERSION}/
-
-    cp "Dockerfile.tpl" "Dockerfile"
-
-    PHP_EXT_GROUP_ALL_PATH="args/PHP_EXT_GROUP_ALL"
-    PECL_EXT_GROUP_ALL_PATH="args/PECL_EXT_GROUP_ALL"
-    TAG_PATH="TAG"
-
-    if [ ! -f "${PHP_EXT_GROUP_ALL_PATH}" ]; then
-        >&2 echo "Missing required file: ${PWD}/${PHP_EXT_GROUP_ALL_PATH}";
-        exit 1;
-    fi;
-    if [ ! -f "${PECL_EXT_GROUP_ALL_PATH}" ]; then
-        >&2 echo "Missing required file: ${PWD}/${PECL_EXT_GROUP_ALL_PATH}";
-        exit 1;
-    fi;
-
-
-    TAG=$(cat "${TAG_PATH}")
-    sed -i "s/{{TAG}}/${TAG}/g" "Dockerfile"
-
-    declare -A BUILD_ARGS;
-    BUILD_ARGS=(
-        [PHP_EXT_GROUP_ALL]="args/PHP_EXT_GROUP_ALL"
-        [PECL_EXT_GROUP_ALL]="args/PECL_EXT_GROUP_ALL"
-    );
-
-    BUILD_ARGS_STR="";
-    for ARG_NAME in ${!BUILD_ARGS[@]}; do
-        ARG_VAL="\\\\\\n";
-        for i in $(cat "${BUILD_ARGS[${ARG_NAME}]}"); do
-            ARG_VAL="${ARG_VAL}${i} \\\\\\n";
-        done;
-        BUILD_ARGS_STR="${BUILD_ARGS_STR}\nARG ${ARG_NAME}=\"${ARG_VAL}\""
-    done;
-
-    sed -i "s/{{ARGS}}/${BUILD_ARGS_STR}/g" "Dockerfile"
+if [ -n "${BUILD_SOURCE_REMOTE}" ]; then
+    git clone "${BUILD_SOURCE}"
+fi;
 
     START_TIME=`date +%s`;
     CMD=$(which docker)" build ${ARGS} ."
     eval ${CMD}
-    
-    
-    END_TIME=`date +%s`; 
+
+
+    END_TIME=`date +%s`;
     echo -n "Build time: "
     echo -n $(($END_TIME - $START_TIME));
     echo " sec"
-fi;
