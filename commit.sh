@@ -60,11 +60,12 @@ cd "${TARGET_VERSION_PATH}"
 git fetch "${REMOTE_NAME}"
 if [ `git branch --list --remote "${REMOTE_NAME}/${BRANCH_NAME}"` ]; then
     git checkout "${REMOTE_NAME}/${BRANCH_NAME}" -b "${BRANCH_NAME}"
-    git rm -rf .
-    git clean -fxd
 else
     git checkout --orphan "${BRANCH_NAME}"
 fi;
+
+git rm -rf .
+git clean -fxd
 
 cp -R "${SOURCE_VERSION_PATH}/." "${TARGET_VERSION_PATH}"
 mv "gitignore.tpl" ".gitignore"
