@@ -1,0 +1,11 @@
+sudo: required
+language: bash
+services:
+- docker
+script:
+- echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USER" --password-stdin
+- docker build -t "rimelek/travisphptest:7.2-fpm" .
+- docker push "rimelek/travisphptest:7.2-fpm"
+env:
+  matrix:
+    secure: TVVpvjiulao4MxIt0lDJ5tWDubBCG8i23Vl3421Ngog9ekOLknlrtIECPnrFMvtjZFgC029q1w6wMRKPWtOIV7PrC0LE/02VERARfZibh6xbkdNlfikiICW1tbk3Mjn9JrkOT7D600TS4n60Es+4nHP6WwBb7EggvOiBjt1d+ISFAPJ25/vxPUcRbQDqsfwSROx4/s35zeqT+m5bSpTh3IWSF/IVn8BnW1QIW3aXBx+7/15mo2U23HnYO9O111bmLHdMIbxp+3G26FTsqN5ic1j/o/hWHZw4+7ziYXXxF2nmhVBfartT76z5wuybGfo9rxTSH2XQVeNbLQCG5W5Ohi0s7cKbPOITHImk5U4+E+7j0XalDwG7A1ZndN4QOcMmfc0/9InRu6+aLrjSGWTBU6GGeTb8E2atPJAglG+OY3eSZ+zP8k9rCfnzf2YgptpTuPe5rk6zJLEnvBSZw0nX33Bdso4jjwp4Tt+qZnlmA2iALHtd90gBR2jmwKmSu9bsBKBVEMsuJTAy/cZY02+ovKqF/+LO/BUPeSAab7e4luTlTgMyXewY4ts+1E1Kck5ORrD85vrk+xjK7qZZKfUbMuHVdmXZ5Z207vW1PFtdBiTQNUtxQWYlppeTL53m9mBm0OzOdSunG+44KB/QVNshftVqbsmmmI46pVPJpvjcynM=
