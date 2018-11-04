@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 
-NO_HOST=$(NO_HOST=$(ping -c 1 itsziget.php.apt-cacher-ng 2>/dev/null | tail -n1 | wc -l)) \
+NO_HOST=$(NO_HOST=$(ping -c 1 rimelek.php.apt-cacher-ng 2>/dev/null | tail -n1 | wc -l)) \
  && if [ "${NO_HOST}" == "0" ]; then \
-        echo 'Acquire::HTTP::Proxy "http://itsziget.php.apt-cacher-ng:3142";' >> /etc/apt/apt.conf.d/01itsziget.php.apt-cacher-ng \
-            && echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01itsziget.php.apt-cacher-ng; \
+        echo 'Acquire::HTTP::Proxy "http://rimelek.php.apt-cacher-ng:3142";' >> /etc/apt/apt.conf.d/01rimelek.php.apt-cacher-ng \
+            && echo 'Acquire::HTTPS::Proxy "false";' >> /etc/apt/apt.conf.d/01rimelek.php.apt-cacher-ng; \
     fi \
  && PHP_EXT_GROUP_NONE="" \
- && PHP_EXT_GROUP_ALL="" \
- && PHP_EXT_GROUP_ALL="${PHP_EXT_GROUP_ALL} bcmath bz2 calendar ctype curl fileinfo dom exif ftp gettext" \
- && PHP_EXT_GROUP_ALL="${PHP_EXT_GROUP_ALL} hash iconv intl json mbstring mcrypt mysqli opcache" \
- && PHP_EXT_GROUP_ALL="${PHP_EXT_GROUP_ALL} pdo pdo_mysql phar posix recode session simplexml snmp" \
- && PHP_EXT_GROUP_ALL="${PHP_EXT_GROUP_ALL} sockets tidy tokenizer xml xmlrpc xmlwriter xsl zip" \
- && PHP_EXT_GROUP_ALL="${PHP_EXT_GROUP_ALL} gd gmp imap ldap oci8 pdo_oci readline " \
  && for PHP_EXT_GROUP__CURRENT in $(echo ${PHP_EXT_GROUP} | tr ",;" " "); do \
         PHP_EXT_GROUP__CURRENT=${PHP_EXT_GROUP__CURRENT^^}; \
         PHP_EXT_GROUP__VAR='PHP_EXT_GROUP_'${PHP_EXT_GROUP__CURRENT}; \
@@ -22,8 +16,6 @@ NO_HOST=$(NO_HOST=$(ping -c 1 itsziget.php.apt-cacher-ng 2>/dev/null | tail -n1 
  && PHP_EXT__DUPL=$(echo ${PHP_EXT} | tr " " "\n" | uniq -d) \
  && PHP_EXT=${PHP_EXT__UNIQ}" "${PHP_EXT__DUPL} \
  && PECL_EXT_GROUP_NONE="" \
- && PECL_EXT_GROUP_ALL="" \
- && PECL_EXT_GROUP_ALL="${PECL_EXT_GROUP_ALL} imagick" \
  && for PECL_EXT_GROUP__CURRENT in $(echo ${PECL_EXT_GROUP} | tr ",;" " "); do \
         PECL_EXT_GROUP__CURRENT=${PECL_EXT_GROUP__CURRENT^^}; \
         PECL_EXT_GROUP__VAR='PECL_EXT_GROUP_'${PECL_EXT_GROUP__CURRENT}; \
@@ -48,6 +40,6 @@ NO_HOST=$(NO_HOST=$(ping -c 1 itsziget.php.apt-cacher-ng 2>/dev/null | tail -n1 
             exit ${EXCODE}; \
         fi; \
     done \
- && if [ -f /etc/apt/apt.conf.d/01itszget.php.apt-cacher-ng ]; then \
-        unlink /etc/apt/apt.conf.d/01itsziget.php.apt-cacher-ng; \
+ && if [ -f /etc/apt/apt.conf.d/01rimelek.php.apt-cacher-ng ]; then \
+        unlink /etc/apt/apt.conf.d/01rimelek.php.apt-cacher-ng; \
     fi
