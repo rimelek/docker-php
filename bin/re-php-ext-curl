@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends \
+        libcurl4-openssl-dev \
+    && docker-php-ext-install -j$(nproc) curl

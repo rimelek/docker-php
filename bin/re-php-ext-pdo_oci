@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+cd /opt/oracle/instantclient \
+    && ICVERSION=$(ls | (grep -o '[0-9]\{2\}\.[0-9]\+' | head -n 1 || true)) \
+    && if [ "$ICVERSION" != "" ]; then \
+            mkdir -p include/oracle/$ICVERSION/ \
+            && cd include/oracle/$ICVERSION/ \
+            && ln -s ../../../sdk/include client \
+            && cd - \
+            && mkdir -p lib/oracle/$ICVERSION/client \
+            && cd lib/oracle/$ICVERSION/client \
+            && ln -s ../../../../ lib \
+            && cd - \
+            && ORACLE_HOME=/opt/oracle/instantclient/lib/oracle/$ICVERSION/client/ \
+                docker-php-ext-configure pdo_oci --with-pdo-oci=instantclient,/opt/oracle/instantclient,$ICVERSION \
+            && docker-php-ext-install pdo_oci; \
+       fi;
