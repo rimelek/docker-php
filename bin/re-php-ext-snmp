@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends \
+        libsnmp-dev \
+        snmp \
+    && docker-php-ext-install -j$(nproc) snmp
