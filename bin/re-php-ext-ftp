@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends \
+        libssl-dev \
+    && docker-php-ext-install -j$(nproc) ftp
