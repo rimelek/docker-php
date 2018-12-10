@@ -8,7 +8,8 @@ For now, the following versions are supported:
 - PHP 5.6 FPM
 - PHP 7.0 FPM
 - PHP 7.1 FPM
-- PHP 7.2 FPM 
+- PHP 7.2 FPM
+- PHP 7.3 fpm
 
 It makes easier to install an extension without knowing which dependencies you need to install or how you have to configure
 the dependencies before running the official docker-php-ext-install.
@@ -22,7 +23,7 @@ Replace PATH with the actual path to a Dockerfile.
 **Example**
 
 ```bash
-./prepare.sh -s 7.0/fpm
+./prepare.sh -s 7.3/fpm
 ```
     
 **Tip:**: It is recommended to pull the already [built images](https://hub.docker.com/r/itsziget/php/) from Docker Hub.
@@ -34,13 +35,13 @@ to install the extensions
 
 * Download the Basic and SDK package of Oracle Instant Client from the official source (you need to accept a license): 
 [http://www.oracle.com/technetwork/database/features/instant-client/index.html](http://www.oracle.com/technetwork/database/features/instant-client/index.html)
-* Copy the contents of instantclient_xx.x directory from each package into  5.6/fpm/opt, 7.0/fpm/opt, 7.1/fpm/opt or 7.2/fpm/opt
+* Copy the contents of instantclient_xx.x directory from each package into  5.6/fpm/opt, 7.0/fpm/opt, 7.1/fpm/opt, 7.2/fpm/opt or 7.3/fpm/opt
 * You can build the image now using prepare.sh and docker. See in the next chapter.
 
 **Tip:** Faster way is building a custom image from existing images on Docker Hub. 
 
 ```dockerfile
-FROM itsziget/php:7.0-fpm
+FROM itsziget/php:7.3-fpm
 
 COPY oracle/instantclient /opt/oracle/instantclient
 
@@ -58,17 +59,17 @@ Make sure the root folder is writable!
 Install all supported extensions:
 
 ```bash
-./prepare.sh -s 7.2/fpm
-cd build/7.2/fpm
+./prepare.sh -s 7.3/fpm
+cd build/7.3/fpm
 docker build -t myphpimage .
 ```
     
 or install only some specified additional extensions:
 
 ```bash
-./prepare.sh -s 7.2/fpm
-cd build/7.2/fpm
+./prepare.sh -s 7.3/fpm
+cd build/7.3/fpm
 docker build --build-arg PHP_EXT_GROUP=none PHP_EXT="gd bz2" --build-arg PECL_EXT_GROUP=none -t myphpimage
 ```
 
-You can change 7.2 to any supported version like 5.6, 7.0 or 7.1
+You can change 7.3 to any supported version like 5.6, 7.0, 7.1 or 7.2
