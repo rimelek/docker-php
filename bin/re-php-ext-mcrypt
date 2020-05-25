@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends \
+        libmcrypt-dev \
+    && docker-php-ext-install -j$(nproc) mcrypt
+    
