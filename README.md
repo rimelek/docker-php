@@ -34,9 +34,9 @@ Replace PATH with the actual path to a Dockerfile.
 If you need to use oci8 and pdo_oci extensions, you have to download some files from Oracle's website. Follow the steps below
 to install the extensions
 
-* Download the Basic and SDK package of Oracle Instant Client from the official source (you need to accept a license): 
+* Download the Basic and SDK package of Oracle Instant Client from the official source (you may need to accept a license): 
 [http://www.oracle.com/technetwork/database/features/instant-client/index.html](http://www.oracle.com/technetwork/database/features/instant-client/index.html)
-* Copy the contents of instantclient_xx.x directory from each package into  `<version>/fpm/opt/oracle/instantclient`
+* Copy the contents of instantclient_xx.x directory from each package into  `common/opt/oracle/instantclient`
 * You can build the image now using prepare.sh and docker. See in the next chapter.
 
 **Tip:** Faster way is building a custom image from existing images on Docker Hub. 
