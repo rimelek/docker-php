@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+DIR=`dirname "$0"`
+EXT=$1
+INSTALL_SCRIPT="${DIR}/re-php-ext-${EXT}"
+
+ISLOADED=$(php -r "echo (int)extension_loaded('${EXT}');");
+
+if [ "${ISLOADED}" == "0" ]; then
+    if [ -x ${INSTALL_SCRIPT} ]; then
+        exec "${INSTALL_SCRIPT}"
+    else
+        docker-php-ext-install -j$(nproc) ${EXT}
+    fi;
+fi;
+
