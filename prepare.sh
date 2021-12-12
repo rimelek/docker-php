@@ -53,7 +53,7 @@ if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
 
 
     TAG=$(cat "${TAG_PATH}")
-    sed -i "s/{{TAG}}/${TAG}/g" "Dockerfile"
+    sed -i "s@{{TAG}}@${TAG}@g" "Dockerfile"
 
     declare -A BUILD_ARGS;
     BUILD_ARGS=(
@@ -70,5 +70,5 @@ if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
         BUILD_ARGS_STR="${BUILD_ARGS_STR}\nARG ${ARG_NAME}=\"${ARG_VAL}\""
     done;
 
-    sed -i "s/{{ARGS}}/${BUILD_ARGS_STR}/g" "Dockerfile"
+    sed -i "s@{{ARGS}}@${BUILD_ARGS_STR}@g" "Dockerfile"
 fi;
