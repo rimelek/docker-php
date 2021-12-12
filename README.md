@@ -11,6 +11,7 @@ For now, the following versions are supported:
 - PHP 7.2 FPM
 - PHP 7.3 FPM
 - PHP 7.4 FPM
+- PHP 8.0 FPM (experimental)
 
 It makes easier to install an extension without knowing which dependencies you need to install or how you have to configure
 the dependencies before running the official docker-php-ext-install.

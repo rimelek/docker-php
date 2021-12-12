@@ -20,7 +20,7 @@ if [ -z "${VERSION}" ]; then
     exit 1
 fi;
 
-VERSIONS="5.6/fpm 7.0/fpm 7.1/fpm 7.2/fpm 7.3/fpm 7.4/fpm"
+VERSIONS="5.6/fpm 7.0/fpm 7.1/fpm 7.2/fpm 7.3/fpm 7.4/fpm 8.0/fpm"
 
 for V in ${VERSIONS}; do
     if [ "${V}" == "${VERSION}" ]; then
