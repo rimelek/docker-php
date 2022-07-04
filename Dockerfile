@@ -10,6 +10,9 @@ ARG PECL_EXT_GROUP=ALL
 ARG PECL_EXT=""
 
 
+ARG PECL_EXT_GROUP_ALL="\
+imagick \
+"
 ARG PHP_EXT_GROUP_ALL="\
 bcmath \
 bz2 \
@@ -50,9 +53,6 @@ ldap \
 oci8 \
 pdo_oci \
 readline \
-"
-ARG PECL_EXT_GROUP_ALL="\
-imagick \
 "
 
 RUN chmod +x /usr/local/bin/re-php-* \
