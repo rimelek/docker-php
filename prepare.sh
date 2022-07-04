@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu -x -o pipefail
+set -eu -o pipefail
 
 VERSION=""
 
@@ -60,7 +60,11 @@ if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
 
 
     TAG=$(cat "${TAG_PATH}")
-    sed -i "s@{{TAG}}@${TAG}@g" "Dockerfile"
+    dockerfile_content="$(cat Dockerfile)"
+    dockerfile_content="$(
+      echo "$dockerfile_content" \
+      | awk -v "tag=$TAG" '{ gsub("{{TAG}}", tag, $0); print $0 }'
+    )"
 
     declare -A BUILD_ARGS;
     BUILD_ARGS=(
@@ -77,5 +81,9 @@ if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
         BUILD_ARGS_STR="${BUILD_ARGS_STR}\nARG ${ARG_NAME}=\"${ARG_VAL}\""
     done;
 
-    sed -i "s@{{ARGS}}@${BUILD_ARGS_STR}@g" "Dockerfile"
+    dockerfile_content="$(
+      echo "$dockerfile_content" \
+      | awk -v "args=$BUILD_ARGS_STR" '{ gsub("{{ARGS}}", args, $0); print $0 }'
+    )"
+    echo "$dockerfile_content" > Dockerfile
 fi;
