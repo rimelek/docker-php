@@ -2,6 +2,6 @@
 
 apt-get install -y --no-install-recommends \
         libgmp-dev \
-    && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
+    && ln -s /usr/include/$(arch)-linux-gnu/gmp.h /usr/include/gmp.h \
     && docker-php-ext-configure gmp --with-gmp=/usr \
     && docker-php-ext-install -j$(nproc) gmp
