@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -eu -o pipefail
+set -eu -x -o pipefail
 
 VERSION=""
 
@@ -24,7 +24,7 @@ fi;
 
 VERSIONS="5.6/fpm 7.0/fpm 7.1/fpm 7.2/fpm 7.3/fpm 7.4/fpm 8.0/fpm 8.1/fpm"
 
-if echo "$VERSIONS" | grep -v "\( \|^\)$VERSION\(\|$\)" &> /dev/null; then
+if echo "$VERSIONS" | grep -v "\( \|^\)$VERSION\( \|$\)" &> /dev/null; then
   >&2 echo "version $VERSION is not supported" 
   exit 1
 fi
