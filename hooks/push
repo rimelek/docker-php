@@ -9,7 +9,7 @@ fi;
 : "${DOCKER_TAG:?}"
 
 
-if [[ "${COPY_TO+x}" == "x" ]]; then
+if [[ "${COPY_TO_REPO+x}" == "x" ]]; then
   echo docker image tag "$DOCKER_REPO:$DOCKER_TAG" "$COPY_TO_REPO:$DOCKER_TAG"
   # Push to the copy first so it will exist even if the second push fails
   echo docker image push "$COPY_TO_REPO:$DOCKER_TAG"
