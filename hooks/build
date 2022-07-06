@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -eu -o pipefail
+
+: "${DOCKER_REPO:?}"
+
+if [[ "${SOURCE_BRANCH+x}" == "x" ]]; then
+  DOCKER_TAG=$(echo "$SOURCE_BRANCH" | cut -d'/' -f 2)-$(echo "$SOURCE_BRANCH" | cut -d'/' -f 3)
+fi;
+
+: "${DOCKER_TAG:?}"
+
+if [[ -f "latest" ]]; then
+  echo docker build -t "$DOCKER_REPO:$DOCKER_TAG" -t "$DOCKER_REPO:latest" .
+else
+  echo docker build -t "$DOCKER_REPO:$DOCKER_TAG" .
+fi;
