@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -eu -o pipefail
+
 : "${DOCKER_REPO:?}"
 
 if [[ "${SOURCE_BRANCH+x}" == "x" ]]; then
@@ -14,6 +16,9 @@ echo
 
 if [[ "${COPY_TO_REPO+x}" == "x" ]]; then
   docker image tag "$DOCKER_REPO:$DOCKER_TAG" "$COPY_TO_REPO:$DOCKER_TAG"
+  if [[ -f "latest" ]]; then
+    docker image tag "$DOCKER_REPO:$DOCKER_TAG" "$COPY_TO_REPO:latest"
+  fi
   
   echo "Check images after retagging: "
   docker image ls
@@ -21,11 +26,11 @@ if [[ "${COPY_TO_REPO+x}" == "x" ]]; then
   # Push to the copy first so it will exist even if the second push fails
   docker image push "$COPY_TO_REPO:$DOCKER_TAG"
   if [ -f "latest" ]; then
-    docker push "$COPY_TO_REPO:latest"
+    docker image push "$COPY_TO_REPO:latest"
   fi
 fi
 
-docker push "$DOCKER_REPO:$DOCKER_TAG"
+docker image push "$DOCKER_REPO:$DOCKER_TAG"
 if [ -f "latest" ]; then
-  docker push "$DOCKER_REPO:latest"
+  docker image push "$DOCKER_REPO:latest"
 fi
