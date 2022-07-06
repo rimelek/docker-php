@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+: "${DOCKER_REPO:?}"
+
+if [[ "${SOURCE_BRANCH+x}" == "x" ]]; then
+  DOCKER_TAG=$(echo "$SOURCE_BRANCH" | cut -d'/' -f 2)-$(echo "$SOURCE_BRANCH" | cut -d'/' -f 3)
+fi;
+
+: "${DOCKER_TAG:?}"
+
+
+if [[ "${COPY_TO+x}" == "x" ]]; then
+  echo docker image tag "$DOCKER_REPO:$DOCKER_TAG" "$COPY_TO_REPO:$DOCKER_TAG"
+  # Push to the copy first so it will exist even if the second push fails
+  echo docker image push "$COPY_TO_REPO:$DOCKER_TAG"
+  if [ -f "latest" ]; then
+    docker push "$COPY_TO_REPO:latest"
+  fi
+fi
+
+docker push "$DOCKER_REPO:$DOCKER_TAG"
+if [ -f "latest" ]; then
+  docker push "$DOCKER_REPO:latest"
+fi
