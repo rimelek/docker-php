@@ -11,8 +11,8 @@ For now, the following versions are supported:
 - PHP 7.2 FPM
 - PHP 7.3 FPM
 - PHP 7.4 FPM
-- PHP 8.0 FPM (experimental)
-- PHP 8.1 FPM (experimental)
+- PHP 8.0 FPM
+- PHP 8.1 FPM
 
 It makes easier to install an extension without knowing which dependencies you need to install or how you have to configure
 the dependencies before running the official docker-php-ext-install.
@@ -26,7 +26,7 @@ Replace PATH with the actual path to a Dockerfile.
 **Example**
 
 ```bash
-./prepare.sh -s 7.4/fpm
+./prepare.sh -s 8.1/fpm
 ```
     
 **Tip:**: It is recommended to pull the already [built images](https://hub.docker.com/r/itsziget/php/) from Docker Hub.
@@ -44,7 +44,7 @@ to install the extensions
 **Tip:** Faster way is building a custom image from existing images on Docker Hub. 
 
 ```dockerfile
-FROM itsziget/php:7.4-fpm
+FROM itsziget/php:8.1-fpm
 
 COPY oracle/instantclient /opt/oracle/instantclient
 
@@ -62,17 +62,17 @@ Make sure the root folder is writable!
 Install all supported extensions:
 
 ```bash
-./prepare.sh -s 7.4/fpm
-cd build/7.4/fpm
+./prepare.sh -s 8.1/fpm
+cd build/8.1/fpm
 docker build -t myphpimage .
 ```
     
 or install only some specified additional extensions:
 
 ```bash
-./prepare.sh -s 7.4/fpm
-cd build/7.4/fpm
+./prepare.sh -s 8.1/fpm
+cd build/8.1/fpm
 docker build --build-arg PHP_EXT_GROUP=none PHP_EXT="gd bz2" --build-arg PECL_EXT_GROUP=none -t myphpimage
 ```
 
-You can change 7.4 to any supported version like 5.6, 7.0, 7.1, 7.2 or 7.3
+You can change 8.1 to any supported version like 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0
