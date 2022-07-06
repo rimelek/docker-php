@@ -10,14 +10,16 @@ fi;
 
 echo "Check images before retagging: "
 docker image ls
+echo
 
 if [[ "${COPY_TO_REPO+x}" == "x" ]]; then
-  echo docker image tag "$DOCKER_REPO:$DOCKER_TAG" "$COPY_TO_REPO:$DOCKER_TAG"
+  docker image tag "$DOCKER_REPO:$DOCKER_TAG" "$COPY_TO_REPO:$DOCKER_TAG"
   
   echo "Check images after retagging: "
   docker image ls
+  echo
   # Push to the copy first so it will exist even if the second push fails
-  echo docker image push "$COPY_TO_REPO:$DOCKER_TAG"
+  docker image push "$COPY_TO_REPO:$DOCKER_TAG"
   if [ -f "latest" ]; then
     docker push "$COPY_TO_REPO:latest"
   fi

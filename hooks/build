@@ -11,7 +11,7 @@ fi;
 : "${DOCKER_TAG:?}"
 
 if [[ -f "latest" ]]; then
-  echo docker build -t "$DOCKER_REPO:$DOCKER_TAG" -t "$DOCKER_REPO:latest" .
+  docker build -t "$DOCKER_REPO:$DOCKER_TAG" -t "$DOCKER_REPO:latest" .
 else
-  echo docker build -t "$DOCKER_REPO:$DOCKER_TAG" .
+  docker build -t "$DOCKER_REPO:$DOCKER_TAG" .
 fi;
