@@ -45,7 +45,7 @@ Follow the steps below to install the extensions
 
 .. code-block:: Dockerfile
 
-    FROM itsziget/php:8.1-fpm
+    FROM rimelek/php:8.1-fpm
 
     COPY oracle/instantclient /opt/oracle/instantclient
 
