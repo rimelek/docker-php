@@ -3,3 +3,12 @@
 /published
 /common/opt/oracle/instantclient/*
 !/common/opt/oracle/instantclient/.gitkeep
+
+# Sphinx files
+/docs/_*
+/docs/.env
+
+# Operating system specific
+
+## macOS
+.DS_Store

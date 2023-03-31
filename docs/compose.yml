@@ -1,0 +1,11 @@
+name: rimelek-php-docs
+
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - target: 8043
+        published: ${PORT:-80}
+        protocol: tcp
+        mode: host
