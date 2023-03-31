@@ -1,78 +1,16 @@
-# README
+PHP Docker images with additional extensions
+============================================
 
-## Introduction
+I started this project in 2016 to support PHP Docker images based on the
+[official Docker images of PHP](https://hub.docker.com/_/php/),
+but with the ability to add PHP extensions more easily without finding out every time which extension
+requires what libraries installed on the host or in this case in the container.
 
-This repository contains the source to build multiple PHP versions based on the [official Docker images of PHP](https://hub.docker.com/_/php/).
-For now, the following versions are supported:
+Since I obviously can't support different images for every possible combination of required extensions,
+I support one for each PHP version containing all the extensions supported by that version and this project,
+but you can also use this project to build your own image.
 
-- PHP 5.6 FPM
-- PHP 7.0 FPM
-- PHP 7.1 FPM
-- PHP 7.2 FPM
-- PHP 7.3 FPM
-- PHP 7.4 FPM
-- PHP 8.0 FPM
-- PHP 8.1 FPM
+You will find a branch for each PHP version in the git repository containing this intro text.
+For more details and supported tag and extensions, visit the documentation on [Read the Docs](https://readthedocs.org/).
 
-It makes easier to install an extension without knowing which dependencies you need to install or how you have to configure
-the dependencies before running the official docker-php-ext-install.
-
-Only thing you need to do is specifying which extensions you want to be installed. You can also install every supported
-extension if you do not specify any extension to install.
-
-The "common" directory is a collection of files that will be copied to each specific PHP version's directory when you run "./prepare -s PATH".
-Replace PATH with the actual path to a Dockerfile. 
-
-**Example**
-
-```bash
-./prepare.sh -s 8.1/fpm
-```
-    
-**Tip:**: It is recommended to pull the already [built images](https://hub.docker.com/r/itsziget/php/) from Docker Hub.
-    
-## oci8 and pdo_oci extensions
-
-If you need to use oci8 and pdo_oci extensions, you have to download some files from Oracle's website. Follow the steps below
-to install the extensions
-
-* Download the Basic and SDK package of Oracle Instant Client from the official source (you may need to accept a license): 
-[http://www.oracle.com/technetwork/database/features/instant-client/index.html](http://www.oracle.com/technetwork/database/features/instant-client/index.html)
-* Copy the contents of instantclient_xx.x directory from each package into  `common/opt/oracle/instantclient`
-* You can build the image now using prepare.sh and docker. See in the next chapter.
-
-**Tip:** Faster way is building a custom image from existing images on Docker Hub. 
-
-```dockerfile
-FROM itsziget/php:8.1-fpm
-
-COPY oracle/instantclient /opt/oracle/instantclient
-
-RUN re-php-install-ext oci8 && re-php-install-ext pdo_oci
-```
-    
-In this case copy the contents of "instantclient" directory to ./oracle/instantclient 
-
-Then you can save the new image into your own private repository.
-
-## Build an image
-
-Make sure the root folder is writable!
-
-Install all supported extensions:
-
-```bash
-./prepare.sh -s 8.1/fpm
-cd build/8.1/fpm
-docker build -t myphpimage .
-```
-    
-or install only some specified additional extensions:
-
-```bash
-./prepare.sh -s 8.1/fpm
-cd build/8.1/fpm
-docker build --build-arg PHP_EXT_GROUP=none PHP_EXT="gd bz2" --build-arg PECL_EXT_GROUP=none -t myphpimage
-```
-
-You can change 8.1 to any supported version like 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0
+Documentation: https://php-docker-images.readthedocs.io/
