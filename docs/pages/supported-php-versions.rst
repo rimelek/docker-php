@@ -28,16 +28,19 @@ PHP FPM images.
      - `5.6/fpm/Dockerfile <https://github.com/rimelek/docker-php/blob/build/5.6/fpm/Dockerfile>`_
 
 
+You can use any of the above tags to pull a PHP Docker image. If you need PHP 8.1, just run
 
+.. code-block:: bash
 
+  docker pull rimelek/php:8.1-fpm
 
+You can also get more detauls about the images and tags without pulling them by going to
+Docker Hub: https://hub.docker.com/r/rimelek/php
 
+.. note::
 
-
-
-
-
-
-
-
+    You might find some old references to :code:`itsziget/php` which is the previous name of this image repository.
+    I realize that I can't just move an image to a different repository and move it back, so I am going to
+    keep that repository indefinitely as an alias of :code:`rimelek/php`, but it is recommended to use the namespace
+    :code:`rimelek`, since this is what I will focus on and probably check more frequently.
 
