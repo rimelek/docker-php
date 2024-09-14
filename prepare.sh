@@ -85,5 +85,15 @@ if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
       echo "$dockerfile_content" \
       | awk -v "args=$BUILD_ARGS_STR" '{ gsub("{{ARGS}}", args, $0); print $0 }'
     )"
+    
+    FIX_APT_STR=""
+    if [[ "$TAG" == "7.0-fpm" ]]; then
+      FIX_APT_STR='RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list'
+    fi
+    dockerfile_content="$(
+      echo "$dockerfile_content" \
+      | awk -v "fix_apt=$FIX_APT_STR" '{ gsub("{{FIX_APT}}", fix_apt, $0); print $0 }'
+    )"
+    
     echo "$dockerfile_content" > Dockerfile
 fi;

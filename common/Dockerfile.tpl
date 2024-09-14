@@ -11,6 +11,8 @@ ARG PECL_EXT=""
 
 {{ARGS}}
 
+{{FIX_APT}}
+
 RUN chmod +x /usr/local/bin/re-php-* \
  && chmod +x /usr/local/bin/re-pecl-* \
  && sync \
