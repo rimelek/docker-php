@@ -87,7 +87,7 @@ if [ "${VERSION}" != "" ] && [ -d build/${VERSION} ]; then
     )"
     
     FIX_APT_STR=""
-    if [[ "$TAG" == "7.0-fpm" ]]; then
+    if [[ "$TAG" == "5.6-fpm" || "$TAG" == "7.0-fpm" ]]; then
       FIX_APT_STR='RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list'
     fi
     dockerfile_content="$(
