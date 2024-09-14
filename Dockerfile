@@ -57,6 +57,8 @@ pdo_oci \
 readline \
 "
 
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
+
 RUN chmod +x /usr/local/bin/re-php-* \
  && chmod +x /usr/local/bin/re-pecl-* \
  && sync \
