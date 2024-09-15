@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends \
+        libtidy-dev \
+    && docker-php-ext-install -j$(nproc) tidy
