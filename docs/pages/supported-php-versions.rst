@@ -10,7 +10,11 @@ PHP FPM images.
 
    * - tags
      - Dockerfile
-   * - 8.1-fpm, latest
+   * - 8.3-fpm, latest
+     - `8.3/fpm/Dockerfile <https://github.com/rimelek/docker-php/blob/build/8.3/fpm/Dockerfile>`_
+   * - 8.2-fpm
+     - `8.2/fpm/Dockerfile <https://github.com/rimelek/docker-php/blob/build/8.2/fpm/Dockerfile>`_
+   * - 8.1-fpm
      - `8.1/fpm/Dockerfile <https://github.com/rimelek/docker-php/blob/build/8.1/fpm/Dockerfile>`_
    * - 8.0-fpm
      - `8.0/fpm/Dockerfile <https://github.com/rimelek/docker-php/blob/build/8.0/fpm/Dockerfile>`_
