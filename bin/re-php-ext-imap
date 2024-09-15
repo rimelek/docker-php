@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+apt-get install -y --no-install-recommends \
+        libc-client2007e-dev \
+        libkrb5-dev \
+    && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
+    && docker-php-ext-install -j$(nproc) imap

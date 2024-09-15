@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -eu -o pipefail
+
+: "${DOCKER_REPO:?}"
+
+if [[ "${SOURCE_BRANCH+x}" == "x" ]]; then
+  DOCKER_TAG=$(echo "$SOURCE_BRANCH" | cut -d'/' -f 2)-$(echo "$SOURCE_BRANCH" | cut -d'/' -f 3)
+fi;
+
+: "${DOCKER_TAG:?}"
+
+echo "Check images before retagging: "
+docker image ls
+echo
+
+docker image push "$DOCKER_REPO:$DOCKER_TAG"
+if [ -f "latest" ]; then
+  docker image push "$DOCKER_REPO:latest"
+fi
+
+if [[ "${COPY_TO_REPO+x}" == "x" ]]; then
+  docker image tag "$DOCKER_REPO:$DOCKER_TAG" "$COPY_TO_REPO:$DOCKER_TAG"
+  if [[ -f "latest" ]]; then
+    docker image tag "$DOCKER_REPO:$DOCKER_TAG" "$COPY_TO_REPO:latest"
+  fi
+  
+  echo "Check images after retagging: "
+  docker image ls
+  echo
+  # Push to the copy first so it will exist even if the second push fails
+  if [[ "${COPY_TO_REPO_AUTH_USER+x}" == "x" ]]; then
+    if [[ "${COPY_TO_REPO_AUTH_PASSWORD+x}" != "x" ]]; then
+      >&2 echo "COPY_TO_USER_AUTH_PASSWORD is not set"
+      exit 1
+    fi
+    echo "$COPY_TO_REPO_AUTH_PASSWORD" | docker login -u "$COPY_TO_REPO_AUTH_USER" --password-stdin
+  fi
+  docker image push "$COPY_TO_REPO:$DOCKER_TAG"
+  if [ -f "latest" ]; then
+    docker image push "$COPY_TO_REPO:latest"
+  fi
+fi
