@@ -22,7 +22,7 @@ run :code:`./prepare.sh -s PATH`. Replace PATH with the actual path to a PHP ver
 
 .. code-block:: bash
 
-  ./prepare.sh -s 8.1/fpm
+  ./prepare.sh -s 8.3/fpm
 
 
 .. note:: You can also pull the already `built images <https://hub.docker.com/r/itsziget/php/>`_ from Docker Hub.
@@ -45,7 +45,7 @@ Follow the steps below to install the extensions
 
 .. code-block:: Dockerfile
 
-    FROM rimelek/php:8.1-fpm
+    FROM rimelek/php:8.3-fpm
 
     COPY oracle/instantclient /opt/oracle/instantclient
 
@@ -65,8 +65,8 @@ Install all supported extensions:
 
 .. code-block:: bash
 
-    ./prepare.sh -s 8.1/fpm
-    cd build/8.1/fpm
+    ./prepare.sh -s 8.3/fpm
+    cd build/8.3/fpm
     docker build -t myphpimage .
 
 
@@ -74,9 +74,9 @@ or install only some specified additional extensions:
 
 .. code-block:: bash
 
-    ./prepare.sh -s 8.1/fpm
-    cd build/8.1/fpm
+    ./prepare.sh -s 8.3/fpm
+    cd build/8.3/fpm
     docker build --build-arg PHP_EXT_GROUP=none PHP_EXT="gd bz2" --build-arg PECL_EXT_GROUP=none -t myphpimage
 
 
-You can change 8.1 to any supported version like 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0
+You can change 8.3 to any supported version like 5.6, 7.0, 7.1, 7.2, 7.3, 7.4, 8.0, 8.1, 8.2
